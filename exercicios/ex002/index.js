@@ -1,3 +1,5 @@
+// exercicio para treinar exibicao no console e operadores
+
 const primeiroNome = 'Nelson';
 const segundoNome = 'Martins';
 const idade = 24; 

@@ -1,3 +1,5 @@
+// exercicio para treinar numbers
+
 // Capturando elementos
 const numero = document.querySelector("#numero");
 const textos = document.querySelector("#textos");
