@@ -1,136 +1,74 @@
-// Funções 
-// Funções são blocos de código que executam uma ação (mandar um valor para ela e pegar de volta)
+// Objetos
+// Assim como as arrays, os objetos também podem ter seus valores internos mutaveis. Por isso podemos alterar valores dentro desses tipos de dados, só nao podemos atribuir novamente
 
-// Para criar uma função usamos a palavra function e apos isso o nome dela (usamos a mesma regra para criação de nome das variaveis), depois colocamos parenteses e abrimos e fechamos chaves
+// Sem os objetos criariamos um grupo de pessoas com suas propriedades assim:
 
-function dizerOla(){
-    console.log('Olá, mundo!'); 
-    // essa função vai dizer 'olá, mundo' quando ela for executada
-    // tudo que fica dentro da função está protegido
-};
+const nome01 = 'Nelson'; 
+const sobrenome01 = 'Martins';
+const idade01 = 24;
 
-// chamando função (é só chamar pelo nome); 
-dizerOla(); // executando o que esta dentro da função
+const nome02 = 'Maria'; 
+const sobrenome02 = 'Eduarda';
+const idade02 = 21; // ... 
 
-// Parametros (fazer a função receber valores)
+// Precisariamos de varias variaveis relacionadas e enumeradas, os objetos resolvem isso:
 
-function dizerOlaAAlguem(nome){ // essa função vai dizer ola para alguem, por isso ela vai receber como parametro o nome de uma pessoa
-    console.log(`Olá, ${nome}!`); // quando chamarmos essa função precisamos passar para ela esse nome
-};
+const pessoa1 = { // com os objetos nos criamos com nome seguidos de {} e ai colocamos todos os atributos do objeto com o nome do atributo seguido de de dois pontos
+    nome: 'Nelson', 
+    sobrenome: 'Martins',
+    idade: 24
+}; // assim o objeto 'pessoa1' possui os atributos nome, sobrenome e idade
 
-dizerOlaAAlguem('Nelson'); // passamos o nome 'Nelson' como argumento para essa função
+console.log(pessoa1); // exibindo o objeto inteiro
+console.log(pessoa1.idade); // exibindo apenas o atributo 'idade' do objeto pessoa1
 
-// funções são blocos de código reutilizaveis e assim usar ela quantas vezes desejarmos
-const meuNome = 'Nelson Martins'; 
-dizerOlaAAlguem(meuNome); // podemos passar variaveis como argumento
+// Também podemos modificar esses atributos
 
-// obs: sempre que passamos um valor a variavel chamamos de argumento
+pessoa1.sobrenome = 'Neto'; // agora o atributo sobrenome teve seu valor atualizado
+console.log(pessoa1.sobrenome); // exibindo apenas o atributo 'sobrenome'
 
-// retorno de uma função
+// Porém, dessa forma não resolvemos todos os problemas porque cada pessoa ainda é um objeto, logo, para melhorar ainda mais podemos criar uma função que retorna um objeto
 
-dizerOla(); 
-dizerOlaAAlguem(meuNome); // essas duas funções não retornam nada, para verificar isso podemos tentar salvar o retorno dela em uma variavel
-const variavelDizerOla = dizerOla(); // quando colocamos uma função dentro de uma variavel significa que desejamos receber o valor de retorno dela, como essa função não retorna nada então o resultado é undefined, mas ela vai ser executada
-console.log(variavelDizerOla); // undefined
+const criarPessoas = (nome, sobrenome, idade) => { // parametros
+    return {nome, sobrenome, idade}; // essa função recebe três parametros e retorna eles dentro de um objeto {}.
 
-// Precisamos especificar o que desejamos que ela retorne e para isso precisamos usar a palavra 'return'
-
-function dizerOlaDenovo(){
-    console.log('Olá, Mundo!'); // a função vai executar essa mensagem
-    return `Ela disse 'ola'`; // e o retorno dela é essa mensagem, so para teste
-};
-
-dizerOlaDenovo(); // assim ela não vai exibir o seu retorno, para isso precisamos salvar o retorno em uma variavel:
-const variavelDizerOlaDenovo = dizerOlaDenovo(); // salvando o retorno da funcao
-console.log(variavelDizerOlaDenovo); // exibindo a mensagem de retorno
-
-// Melhorando a forma de execução com o return
-
-function dizerOlaMaisUmaVez(){
-    return `Olá, mundo!`; // a mensagem a ser executada já é o valor de retorno dessa variavel, porem nao vai exibir nenhuma mensagem, vamos precisar salvar em uma variavel e depos exibir para isso
+    // essa função pode ser chamada de factory (fabrica)
+    // com ela podemos criar varias pessoas infinitamente, basta reutiliza-la
 }; 
 
-const variavelDizerOlaMaisUmaVez = dizerOlaMaisUmaVez(); // salvando o retorno da variavel
-console.log(variavelDizerOlaMaisUmaVez); // exibindo
+const primeiraPessoa = criarPessoas('Nelson', 'Martins', '24'); // passando os argumentos para a função e salvando o objeto retornado dentro dessa variavel
+console.log(primeiraPessoa); // exibindo objeto
+primeiraPessoa.sobrenome = 'Neto'; // também podemos fazer alteracoes 
+console.log(primeiraPessoa.sobrenome); // exibindo apenas o atributo 'sobrenome'    
 
-// funçao que soma dois numeros:
+// Podemos colocar funcoes dentro de um objeto e quando isso ocorre as funções são chamadas de "métodos"
 
-function adicao(x, y){
-    const resultado = x + y; // variavel que soma
-    return resultado; // o retorno da funcao é resultado da soma
-}; 
-const somando = adicao(2248824, 29382358); // salvando retorno da funcao
-console.log(somando); // exibindo retorno
-
-// Proteção da função: não podemos acessar o que esta dentro da função do lado de fora dela 
-
-function testandoProtecao(){
-    const protegido = true;
-    return protegido;
+const segundaPessoa = {
+    nome: 'Maria', 
+    sobrenome: 'Eduarda',
+    idade: 21,
+    seApresentar(nome = segundaPessoa.nome, sobrenome = segundaPessoa.sobrenome, idade = segundaPessoa.idade) { // esse meotodo retorna uma mensagem na tela e usa os proprios atributos para isso
+        return `Olá, meu nome é ${nome} ${sobrenome}, e eu tenho ${idade} anos!`; // mensagem que a funcao retorna
+    },
+    estudos(){ // um objeto pode ter inumeros metodos
+        return 'eu estudo javascript';
+    }
 };
 
-// console.log(protegido); // estamos tentando exibir a const protegido, porem, nao é possivel já que ela é restrita a função, logo o resultado é um erro
+console.log(segundaPessoa.seApresentar()); // executando metodo dentro da funcao
+console.log(segundaPessoa.estudos()); // executando outro metodo
 
-const protegido = true; // variavel de mesmo nome e valor do lado de fora, isso prova que sao duas coisas diferentes 
-console.log(protegido);
+// A palavra 'this' referencia o proprio objeto e é ela que devemos utilizar para referenciar o proprio objeto, diferente da forma que fizemos acima
 
-// O return encerra a função - tudo que vem apos o return nao será executado 
-
-function encerrando(x, y){ // passando dois parametros
-    return 'encerrando função...'; 
-    const soma = x + y; // essa linha nunca será executada
-    console.log(soma); // e nem essa
+const terceiraPessoa = {
+    nome: 'Levi', 
+    sobrenome: 'Martins',
+    idade: 'ainda não nasci',
+    falar(){ // com a palavra this nos referenciamos o proprio objeto em que o metodo faz parte, por isso nao foi necessario passar os parametros e argumentos
+        return `Olá, me chamo ${this.nome} ${this.sobrenome} e eu ${this.idade}.`; // isso deixou o codigo mais limpo e direto
+    }
 };
 
-const funcaoEncerrada = encerrando(12, 21); // mesmo passando os parametros, as linhas abaixo do return nunca serao executadas
-console.log(funcaoEncerrada); // exibindo apenas o retorno
+console.log(terceiraPessoa.falar()); // executando funcao que referencia o proprio objeto em que ela faz parte
 
-// chamando funcao sem passar os argumentos 
-
-function multiplicacao(x, y){
-    const resultado = x * y;
-    return resultado;
-};
-
-const multiplicando = multiplicacao(); // o retorno será NaN
-console.log(multiplicando); // NaN...
-
-const multiplicando2 = multiplicacao(2); // com apenas 1 valor o também dará NaN
-console.log(multiplicando2); // NaN...
-
-// Evitando problemas definindo valores padrão para os parametros
-
-function subtracao(x = 0, y = 0){ // aqui estamos definindo que o valor padrao para os parametros é 0, ou seja, se nao passarmos valor nenhum ele vai assumir que os argumentos são 0 e 0; 
-    const resultado = x - y; 
-    return resultado;
-}; 
-
-const subtraindo = subtracao(); // nao passando valores o resultado vai ser 0 ou inves de NaN
-console.log(subtraindo); // 0 - 0 = 0
-
-const subtraindo2 = subtracao(2); // passando apenas um valor, ele vai assumir que x = 2 e o y ele vai assumir o valor padrão, que é 0
-console.log(subtraindo2); // 2 - 0 = 2
-
-// funções anonimas
-
-const dizerMeuNome = function(){ // funções anonimas sao a mesma coisa das anteriores com a diferença de que elas nao possui um nome definido
-    return 'Olá, Nelson';
-}
-
-console.log(dizerMeuNome()); // o que acontece é que no final das contas o nome da função vai ser o nome da variavel que guarda ela
-
-// Arrow functions (tambeem é uma função anonima), ela veio para facilitar mais a criacao de funcoes
-
-const dizerMeuNomeArrow = (nome) => {
-    return `Olá, ${nome}!`;
-}; // isso seria uma versao mais completa de uma arrow function, porem, ela foi criada para ser mais simples 
-
-console.log(dizerMeuNomeArrow('Nelson')); // executando ela. 
-
-// Arrow function da forma mais simplificada...
-
-const digaONome = nome => `Olá, ${nome}!`; // a arrow function dispensa os parenteses se ela so tiver um parametro e dispensa o return se ele acontecer de forma direta
-console.log(digaONome('Nelson')); // executa da mesma forma
-
-// obs: geralmente desejaremos criar funcoes pequenas que executam apenas uma especialidade
-
+// Se fossemos dividir o javascript em dois pedaços poderiamos dividir em funcoes e objetos

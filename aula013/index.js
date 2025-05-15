@@ -1,70 +1,55 @@
-// Numbers
-// O JavaScript possui imprecisao nos numeros
+// Objeto Math 
 
-let numeroInteiro = 10; // number
-let numeroDecimal = 2.5; // number
+let num1 = 9.6; // numero decimal
 
-// Convertendo numero para string para concatenarmos eles, usamos o .toString()
+// Arredondando numero para baixo:
+let arrendondarParaBaixo = Math.floor(num1); // Usamos o Math.floor para arrendondar o valor para baixo
+console.log(arrendondarParaBaixo); // 9.6 >> 9
 
-console.log(numeroInteiro.toString() + numeroDecimal.toString()); // 102.5 (concatenado)
+// Arredondando numero para cima:
+let arrendondarParaCima = Math.ceil(num1); // Usamos o Math.ceil() para arrendondar o valor para cima
+console.log(arrendondarParaCima); // 9.6 >> 10
 
-// Porém, da forma feita acima esse numero nao deixou de ser numero, somente na exibição é ele se tornou string (ele foi convertido temporariamente), confira:
+// Arredondando numero para o valor mais proximo:
+num1 = 9.5;
+let arrendondamentoMaisProximo = Math.round(num1); // Essa função vai arredondar para cima a partir de .5 e para baixo a partir de .4 automaticamente
+let num2 = 9.4; 
+let arrendondamentoMaisProximo2 = Math.round(num2); // aqui ele vai arredondar para baixo
+console.log(arrendondamentoMaisProximo); // 9.5 >> 10
+console.log(arrendondamentoMaisProximo2); // 9.4 >> 9
 
-console.log(typeof numeroInteiro, typeof numeroDecimal); // number number
+// Pegando o maior e o menor numero de um sequencia
 
-// Se desejarmos a conversao de fato precisamos armazenar isso em uma variavel:
+console.log(Math.max(1, 2, 3, 4, 12030, 2938482, 394823)); // o método max captura o maior numero de uma sequencia
+console.log(Math.min(1, 2, 3, 4, 12030, 2938482, 394823)); // o método min captura o menor numero de uma sequencia
 
-numeroInteiro = numeroInteiro.toString(); 
-numeroDecimal = numeroDecimal.toString();
-console.log(typeof numeroInteiro, typeof numeroDecimal);
+// Gerando numeros aleatorios
 
-// O mesmo vale para conversao de number para string
+let numeroAleatorio = Math.random(); // ele vai gerar um numero aleatorio entre 0 e 1
+console.log(numeroAleatorio);
 
-let numeroInteiroString = '10'; 
-let numeroDecimalString = '2.5'; // strings
+// Conseguindo um numero aleatorio entre 1 e 10
 
-console.log(Number(numeroInteiroString) + Number(numeroInteiroString)); // aqui o numero so esta sendo convertido para exibicao, ele é convertido temporariamente
+numeroAleatorio = Math.random() * (10 - 1) + 1; // sempre devemos subtrair o numero maximo pelo minimo e depois somar com o minimo
+console.log(numeroAleatorio); // o numero sai quebrado 
+// podemos arredondar o numero para ficar melhor:
+numeroAleatorio = Math.round(Math.random() * (10 - 1) + 1);
+console.log(numeroAleatorio); // agora o numero sempre vira inteiro
+console.log(Number.isInteger(numeroAleatorio)); // e inteiro, o arredondamento de fato transforma o numero em inteiro
 
-console.log(typeof numeroInteiroString, typeof numeroDecimalString); // mas os valores e mantem number, se desejarmos a conversao de fato precisamos guardar o valor em uma variavel
+// Elevando numero
 
-numeroInteiroString = Number(numeroInteiroString);
-numeroDecimalString = Number(numeroDecimalString); 
-console.log(typeof numeroInteiroString, typeof numeroDecimalString); // agora sim as strings foram convertidas para number
+const elevandoNumero = Math.pow(numeroAleatorio, 2); // estamos pegando aquele numero aleatorio e elevando a 2 
+console.log(elevandoNumero);
 
-// Pegando a versao binaria do numero com .toString(2); 
+// Descobrindo a raiz quadrada de um numero
 
-const anoDeNascimento = 2001; 
-console.log(anoDeNascimento.toString(2)); // O método .toString() pode receber um argumento de base númerica e ele aceita base de 2 a 36 (binario, octal, decimal, hexadecimal etc)
+const raizManeiraNormal = Math.round(numeroAleatorio ** (1/2)); // quando elevamos um numero a 1/2 conseguimos a raiz quadrada dele
+const raizUsandoMath = Math.round(Math.sqrt(numeroAleatorio)); // A mesma coisa pode ser feits usando o metodo .sqrt()
+console.log(raizManeiraNormal, raizUsandoMath); // exibindo o mesmo valor nas duas variaveis com os valores ja arredondados
 
-// Curiosamente existe uma forma de retornar do binario para o decimal
+// Se divisao for feita por um numero muito pequeno o javascript apresenta o valor infinity, por isso, é possivel dividir um numero por 0
 
-const anoDeNascimentoBinario = anoDeNascimento.toString(2);
-console.log(parseInt(anoDeNascimentoBinario, 2)); // assim pegamos um valor binario e retornamos para o decimal: 2000
+console.log(100 / 0); // ele nao apresenta erro como a maioria das linguagens e ele avalia como true
 
-// Escolhendo quantidade de casas decimais os numeros podem ter com .toFixed()
 
-const numeroGigante = 10.24453534; // isso é um numero com muitas casas decimais
-console.log(numeroGigante.toFixed(2)); // com o método .toFixed() podemos passar quantas casas decimais desejamos, ou seja, passamos duas e o numero vai ser exibido assim: 10.24 
-
-// Verificando se um numero é inteiro ou decimal/float utilizando o objeto Number e o método .isInteger
-
-let numeroTeste = 10; // inteiro, porem, podemos mudar o valor para testar
-
-console.log(Number.isInteger(numeroTeste)); // Primeiro acessamos o objeto number e dentro dele o método isInteger(), depois, dentro dele passamos o numero que desejamos checar, ele vai retornar true se o numero for inteiro e false se for decimal
-
-// Verificando se uma operacao é válida com numeros com isNaN
-
-const numero1 = 10; // number
-const string1 = 'Nelson'; // string
-console.log(Number.isNaN(numero1 + string1)); //  estamos acessando o objeto number e usando o método isNaN para verificar se a operacao deu NaN (not a number), se sim, ele exibe true, se nao, ele exibe false
-
-// nao é uma boa pratica de programacao fazer contas utilizando strings, sempre converta explicitamente para um numero
-
-// O padrão de precisao de numeros javascript é o IEEE 754-2008, e esse padrao possui uma certa imprecisao:
-
-let teste1 = 0.7; 
-let teste2 = 0.1; 
-let conta = teste1 + teste2;
-console.log(conta); // ao inves de exibir 8, ele exibe 0.799... (que nao vai fazer tanta diferenca aqui), para resolver isso usamos a conversao de numeros decimais e o toFixed
-conta = Number(conta.toFixed(2)); // agora sim nos temos 0.8
-console.log(Number.isInteger(conta)); // e o numero de fato é float (entao false), se estivessemos usado somente o isInteger nao iria funcionar muito bem, apenas visualmente

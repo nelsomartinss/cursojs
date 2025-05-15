@@ -1,100 +1,136 @@
-// Arrays/Listas/Matrizes 
+// Funções 
+// Funções são blocos de código que executam uma ação (mandar um valor para ela e pegar de volta)
 
-// Para criar um array utilizamos colchetes 
-const familia = ['Nelson', 'Maria', 'Levi', 'Amélie']; // array de strings 
-const numeros = [1, 2, 34, 234, 4546]; // array de numeros
+// Para criar uma função usamos a palavra function e apos isso o nome dela (usamos a mesma regra para criação de nome das variaveis), depois colocamos parenteses e abrimos e fechamos chaves
 
-const arrayDiversa = ['Nelson', undefined, null, 123, -12, true]; // array com diversos tipos primitivos, porem, isso NÃO É UMA BOA PRATICA - Sempre tente manter um array apenas com um tipo de dado
+function dizerOla(){
+    console.log('Olá, mundo!'); 
+    // essa função vai dizer 'olá, mundo' quando ela for executada
+    // tudo que fica dentro da função está protegido
+};
 
-console.log(familia);
-console.log(numeros);
-console.log(arrayDiversa); // exibindo
+// chamando função (é só chamar pelo nome); 
+dizerOla(); // executando o que esta dentro da função
 
-// Assim como as strings, as arrays também são indexados, porém, eles são indexados por elemento
-//                     0          1      2        3
-// const familia = ['Nelson', 'Maria, 'Levi', 'Amélie'];
+// Parametros (fazer a função receber valores)
 
-// Acessando primeiro elemento de um array
+function dizerOlaAAlguem(nome){ // essa função vai dizer ola para alguem, por isso ela vai receber como parametro o nome de uma pessoa
+    console.log(`Olá, ${nome}!`); // quando chamarmos essa função precisamos passar para ela esse nome
+};
 
-console.log(familia[0]); // primeira posição da array
+dizerOlaAAlguem('Nelson'); // passamos o nome 'Nelson' como argumento para essa função
 
-// Editando algum elemento do array 
+// funções são blocos de código reutilizaveis e assim usar ela quantas vezes desejarmos
+const meuNome = 'Nelson Martins'; 
+dizerOlaAAlguem(meuNome); // podemos passar variaveis como argumento
 
-familia[2] = 'Davi'; // estamos substituindo a segunda posição da array de 'Levi' para 'Davi' 
-console.log(familia[2]); // exibindo
-console.log(familia); // exibindo array completa 
+// obs: sempre que passamos um valor a variavel chamamos de argumento
 
-// Obs: Mesm o criando essa variavel com const algumas estruturas de dados como array e object podem ser mudados. Quando usamos const com valores mutaveis (array ou objetos) esses valores podem ser mudados por que a variavel continua apontando para o mesmo local da memoria e a mudança é apenas interna no objeto, a unica coisa que nao poderiamos fazer é mudar o valor/tipo da variavel, assim: 
+// retorno de uma função
 
-// const familia = 'testando'; >> isso nao é possivel
+dizerOla(); 
+dizerOlaAAlguem(meuNome); // essas duas funções não retornam nada, para verificar isso podemos tentar salvar o retorno dela em uma variavel
+const variavelDizerOla = dizerOla(); // quando colocamos uma função dentro de uma variavel significa que desejamos receber o valor de retorno dela, como essa função não retorna nada então o resultado é undefined, mas ela vai ser executada
+console.log(variavelDizerOla); // undefined
 
-// Adicionando item ao array 
+// Precisamos especificar o que desejamos que ela retorne e para isso precisamos usar a palavra 'return'
 
-console.log(familia[4]); // essa posição não existe na array >> retorna um undefined, pois é uma posição indefinida
-familia[4] = 'Levi'; // estamos adicionando valor a essa posição agora 
-console.log(familia[4]); // exibindo valor adicionado
+function dizerOlaDenovo(){
+    console.log('Olá, Mundo!'); // a função vai executar essa mensagem
+    return `Ela disse 'ola'`; // e o retorno dela é essa mensagem, so para teste
+};
 
-// Descobrindo tamanho da array 
+dizerOlaDenovo(); // assim ela não vai exibir o seu retorno, para isso precisamos salvar o retorno em uma variavel:
+const variavelDizerOlaDenovo = dizerOlaDenovo(); // salvando o retorno da funcao
+console.log(variavelDizerOlaDenovo); // exibindo a mensagem de retorno
 
-console.log(familia.length); // usamos o atributo lenght para descobrir o tamanho da array, ou seja, quantos itens a array possui.
+// Melhorando a forma de execução com o return
 
-// Adicionando item ao final do array sem precisar saber o tamanho dela com push()
+function dizerOlaMaisUmaVez(){
+    return `Olá, mundo!`; // a mensagem a ser executada já é o valor de retorno dessa variavel, porem nao vai exibir nenhuma mensagem, vamos precisar salvar em uma variavel e depos exibir para isso
+}; 
 
-familia.push('Anélie'); // assim estamos adicionando mais um item ao array sem precisa saber quantas posições ela possui
-console.log(familia); // exibindo array
+const variavelDizerOlaMaisUmaVez = dizerOlaMaisUmaVez(); // salvando o retorno da variavel
+console.log(variavelDizerOlaMaisUmaVez); // exibindo
 
-// Adicionando item ao inicio do array com unshift()
+// funçao que soma dois numeros:
 
-familia.unshift('Celine'); // adicionando celine ao inicio do array e isso vai mudar todo os indices do array
-console.log(familia); // exibindo array completa 
+function adicao(x, y){
+    const resultado = x + y; // variavel que soma
+    return resultado; // o retorno da funcao é resultado da soma
+}; 
+const somando = adicao(2248824, 29382358); // salvando retorno da funcao
+console.log(somando); // exibindo retorno
 
-// Removendo elementos do final do array com pop()
+// Proteção da função: não podemos acessar o que esta dentro da função do lado de fora dela 
 
-const removido = familia.pop(); // Anélie vai ser removida da array e vai ser salva nessa variavel
-console.log(removido); // exibindo item removido
-console.log(familia); // array nova
+function testandoProtecao(){
+    const protegido = true;
+    return protegido;
+};
 
-// Obs: Geralmente colocaremos itens no array pelo final mesmo
+// console.log(protegido); // estamos tentando exibir a const protegido, porem, nao é possivel já que ela é restrita a função, logo o resultado é um erro
 
-// Removendo elementos do inicio do array com shift()
+const protegido = true; // variavel de mesmo nome e valor do lado de fora, isso prova que sao duas coisas diferentes 
+console.log(protegido);
 
-const removido2 = familia.shift(); // Celine vai ser removida da array e vai ser salva nessa variavel 
-console.log(removido2); // exibindo item removido do inicio 
-console.log(familia); //array nova
+// O return encerra a função - tudo que vem apos o return nao será executado 
 
-// Podemos deletar valores e deixar seu espaço vazio
+function encerrando(x, y){ // passando dois parametros
+    return 'encerrando função...'; 
+    const soma = x + y; // essa linha nunca será executada
+    console.log(soma); // e nem essa
+};
 
-delete familia[2]; // agora o espaço que seria de 'davi' será: <1 empty item>
-console.log(familia[2]); // vai mostrar undefined
-console.log(familia); // exibindo
+const funcaoEncerrada = encerrando(12, 21); // mesmo passando os parametros, as linhas abaixo do return nunca serao executadas
+console.log(funcaoEncerrada); // exibindo apenas o retorno
 
-// Corrigindo... 
+// chamando funcao sem passar os argumentos 
 
-const elementoRealocado = familia.pop(); // Vamos pegar o ultimo elmento e deletar da array e salvar nessa variavel
-familia[2] = elementoRealocado; // colocaremos esse elemento naquela posicao vazia
-console.log(familia.length); // exibindo o novo tamanho da array
-console.log(familia[2]); // elemento realocado
-console.log(familia); // array completa 
+function multiplicacao(x, y){
+    const resultado = x * y;
+    return resultado;
+};
 
-// Obs: Nunca deixe buracos na sua array
+const multiplicando = multiplicacao(); // o retorno será NaN
+console.log(multiplicando); // NaN...
 
-// Fatiando array com slice()
+const multiplicando2 = multiplicacao(2); // com apenas 1 valor o também dará NaN
+console.log(multiplicando2); // NaN...
 
-const pais = familia.slice(0, 2); // queremos apenas os  dois primeiros elementos da array, porém, se fatiarmos de 0 a 1, ele cortará o 1, por isso colocamos de 0 a 2, para ele cortar o 2 e sobrar o 0 e 1; 
-console.log(`Os pais da família são ${pais}`); // exibindo
+// Evitando problemas definindo valores padrão para os parametros
 
-const filhos = familia.slice(-2); // aqui estamos pegando apenas as 2 ultimas posicoes da lista
-console.log(`Os filhos da família são ${filhos}`); // exibindo
+function subtracao(x = 0, y = 0){ // aqui estamos definindo que o valor padrao para os parametros é 0, ou seja, se nao passarmos valor nenhum ele vai assumir que os argumentos são 0 e 0; 
+    const resultado = x - y; 
+    return resultado;
+}; 
 
-// Melhorando a exibinção com .join()
+const subtraindo = subtracao(); // nao passando valores o resultado vai ser 0 ou inves de NaN
+console.log(subtraindo); // 0 - 0 = 0
 
-console.log(`Os pais da família são ${pais.join(' e ')}`);
-console.log(`Os filhos da família são ${filhos.join(' e ')}`); // estamos colocando um 'e' entre as virgulas ou espaços da array para melhorar a exibicao
+const subtraindo2 = subtracao(2); // passando apenas um valor, ele vai assumir que x = 2 e o y ele vai assumir o valor padrão, que é 0
+console.log(subtraindo2); // 2 - 0 = 2
 
-// Um array é um objeto indexado, por isso ele vai retornar 'object' no typeof
+// funções anonimas
 
-console.log(typeof familia); // object 
+const dizerMeuNome = function(){ // funções anonimas sao a mesma coisa das anteriores com a diferença de que elas nao possui um nome definido
+    return 'Olá, Nelson';
+}
 
-// Se desejarmos verificar se REALMENTE é um array devemos pesquisar assim:
+console.log(dizerMeuNome()); // o que acontece é que no final das contas o nome da função vai ser o nome da variavel que guarda ela
 
-console.log(familia instanceof Array); // se retornar true de fato é uma array
+// Arrow functions (tambeem é uma função anonima), ela veio para facilitar mais a criacao de funcoes
+
+const dizerMeuNomeArrow = (nome) => {
+    return `Olá, ${nome}!`;
+}; // isso seria uma versao mais completa de uma arrow function, porem, ela foi criada para ser mais simples 
+
+console.log(dizerMeuNomeArrow('Nelson')); // executando ela. 
+
+// Arrow function da forma mais simplificada...
+
+const digaONome = nome => `Olá, ${nome}!`; // a arrow function dispensa os parenteses se ela so tiver um parametro e dispensa o return se ele acontecer de forma direta
+console.log(digaONome('Nelson')); // executa da mesma forma
+
+// obs: geralmente desejaremos criar funcoes pequenas que executam apenas uma especialidade
+

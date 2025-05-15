@@ -1,37 +1,23 @@
-// Esse exercicio tem como objetivo praticar o basico funções, arrays e objetos
+// exercicio para treinar numbers
 
 // Capturando elementos
-const formulario = document.querySelector('#formulario'); // capturando formulario
-const objetos = document.querySelector('#objetos'); // elemento que ira receber os textos
+const numero = document.querySelector("#numero");
+const textos = document.querySelector("#textos");
 
-// funcao que cria paragrafo
-const criarParagrafo = (nome, sobrenome, peso, altura) => {
-    const paragrafo = document.createElement('p'); 
-    paragrafo.textContent = `${nome} ${sobrenome} pesa ${peso} e possui ${altura}cm de altura.`; 
-    objetos.appendChild(paragrafo);
-};
+// Input e saída do input
+// const numeroInput = Math.round(Math.random() * (100 - 1) + 1);
+const numeroInput = Number(prompt('Digite um número:'));
+numero.textContent += `${numeroInput}`; // usamos text content quando não precisamos adicionar tags html ao texto
 
-// funcao que pega cria objetos e coloca dentro de uma array 
-const arrayDosObjetos = [];
-const arrayComObjetos = (nome, sobrenome, peso, altura) => {
-    const objeto = {nome, sobrenome, peso, altura}; 
-    arrayDosObjetos.push(objeto); 
-};
+// Processamento e saída
+textos.innerHTML = `<p>A raiz quadrada do seu número é <strong>${Math.round(Math.sqrt(numeroInput))}</strong></p>`;
 
-// evento de envio
-formulario.addEventListener('submit', (event) => {
-    event.preventDefault(); // quando o envio do formulario for feito o preventDefault vai impedir recarregamento da pagina
+textos.innerHTML += `<p>O número é inteiro?  <strong>${Number.isInteger(numeroInput)}</strong></p>`;
 
-    // capturando os valores sempre que o envio for feito
-    const nome = document.querySelector('#nome').value;
-    const sobrenome = document.querySelector('#sobrenome').value;
-    const peso = Number(document.querySelector('#peso').value);
-    const altura = Number(document.querySelector('#altura').value);
+textos.innerHTML += `<p>Pode ser classificado como NaN? <strong>${isNaN(numeroInput)}</strong></p>`; // se recebermos uma string aqui a operacao Number.isNaN vai retornar false mesmo sendo uma string por que assim ele vai tentar converter para numero, por isso precisamos usar apenas isNaN()
 
-    // Exibindo elementos
-    criarParagrafo(nome, sobrenome, peso, altura);
+textos.innerHTML += `<p>O número arredondado para baixo é <strong>${Math.floor(numeroInput)}</strong></p>`;
 
-    // Criando array com objetos
-    arrayComObjetos(nome, sobrenome, peso, altura);
-    console.log(arrayDosObjetos);
-});
+textos.innerHTML += `<p>O número arredondado para cima é <strong>${Math.ceil(numeroInput)}</strong></p>`;
+
+textos.innerHTML += `<p>O número com duas casas decimais é <strong>${numeroInput.toFixed(2)}</strong></p>`;

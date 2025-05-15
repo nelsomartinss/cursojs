@@ -1,23 +1,25 @@
-// exercicio para treinar numbers
+// A janela que se chama window é o elemento pai de todos os outros elementos que estão na aba 
 
-// Capturando elementos
-const numero = document.querySelector("#numero");
-const textos = document.querySelector("#textos");
+// O objeto document esta dentro window, ele se refere ao documento html e dentro do html temos o body
 
-// Input e saída do input
-// const numeroInput = Math.round(Math.random() * (100 - 1) + 1);
-const numeroInput = Number(prompt('Digite um número:'));
-numero.textContent += `${numeroInput}`; // usamos text content quando não precisamos adicionar tags html ao texto
+// capturando body
+const body = document.body; 
+// escrevendo dentro do body com a propriedade innerHTML
+// innerHTML é uma propriedade do DOM, ele permite que lemos ou alteremos o conteúdo HTML de um elemento
+body.innerHTML = 'Olá, mundo';
+body.innerHTML = 'Qualquer outra coisa'; // sempre que dermos um inner html ele substituira o texto
+body.innerHTML = '<h1>Exercicios com Strings</h1>';
+// adicionando um titulo junto com duas quebras de linha
 
-// Processamento e saída
-textos.innerHTML = `<p>A raiz quadrada do seu número é <strong>${Math.round(Math.sqrt(numeroInput))}</strong></p>`;
+// Exercicio - Dissecando String e escrevendo no documento HTML
 
-textos.innerHTML += `<p>O número é inteiro?  <strong>${Number.isInteger(numeroInput)}</strong></p>`;
-
-textos.innerHTML += `<p>Pode ser classificado como NaN? <strong>${isNaN(numeroInput)}</strong></p>`; // se recebermos uma string aqui a operacao Number.isNaN vai retornar false mesmo sendo uma string por que assim ele vai tentar converter para numero, por isso precisamos usar apenas isNaN()
-
-textos.innerHTML += `<p>O número arredondado para baixo é <strong>${Math.floor(numeroInput)}</strong></p>`;
-
-textos.innerHTML += `<p>O número arredondado para cima é <strong>${Math.ceil(numeroInput)}</strong></p>`;
-
-textos.innerHTML += `<p>O número com duas casas decimais é <strong>${numeroInput.toFixed(2)}</strong></p>`;
+const nome = prompt('Digite seu nome completo: '); 
+document.body.innerHTML += `Seu nome é <strong>${nome}</strong><br>`;
+document.body.innerHTML += `Seu nome possui <strong>${nome.length}</strong> letras<br>`;
+document.body.innerHTML += `A segunda letra do seu nome é <strong>"${nome[1]}"</strong> <br>`;
+document.body.innerHTML += `O primeiro indice da LETRA 'N' do seu nome é <strong>${nome.indexOf('N')}</strong><br>`;
+document.body.innerHTML += `O último indice da LETRA 'N' do seu nome é <strong>${nome.lastIndexOf('N')}</strong><br>`;
+document.body.innerHTML += `As últimas 3 letras do seu nome são <strong>"${nome.slice(-3)}"</strong><br>`; 
+document.body.innerHTML += `As palavras do seu nome são <strong>${(nome.split(' ')).join(", ")}</strong><br>`;
+document.body.innerHTML += `Seu nome com letras maiúsculas: <strong>${nome.toUpperCase()}</strong><br>`;
+document.body.innerHTML += `Seu nome com letras minúsculas: <strong>${nome.toLowerCase()}</strong><br>`;
