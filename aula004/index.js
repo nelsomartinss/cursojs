@@ -22,7 +22,7 @@ console.log(idade); // exibindo valor
 
 // Não podemos criar variaveis com palavras reservadas: let, function, console, etc.
 
-// escreva o nome das variaveis em camelCase, nao comece o nome com simbolos ou numeros, use nomes que façam sentido e nao utilizem espacos, ao inves disso use _ (underline), exemplos:
+// escreva o nome das variaveis em camelCase, nao comece o nome com hifen ou numeros, use nomes que façam sentido e nao utilizem espacos, ao inves disso use _ (underline), exemplos:
 
 let nomeCompleto; // esse nome não começa com numeros, utiliza camelCase, nao comeca com simbolos, numeros e nao possui espacos, outros exemplos
 
