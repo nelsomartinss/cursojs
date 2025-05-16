@@ -24,7 +24,7 @@ console.log(idade); // exibindo valor
 
 // escreva o nome das variaveis em camelCase, nao comece o nome com hifen ou numeros, use nomes que façam sentido e nao utilizem espacos, ao inves disso use _ (underline), exemplos:
 
-let nomeCompleto; // esse nome não começa com numeros, utiliza camelCase, nao comeca com simbolos, numeros e nao possui espacos, outros exemplos
+let nomeCompleto; // esse nome não começa com numeros, utiliza camelCase, nao comeca com hifen, numeros e nao possui espacos, outros exemplos
 
 let cadastroDeProdutos; 
 let listaDeNomesDeAlunos; // essas duas variaveis possuem nomes que façam sentidos
@@ -37,5 +37,6 @@ let usuario002; // podemos usar numeros, só não podemos usar numeros no começ
 
 let MEUNOME; 
 let meunome; // isso é visto como uma variavel diferente
+let $nelson; // podemos comecar com simbolos
 
 // não utilize mais o 'var', utilize let para criar variaveis
